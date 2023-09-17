@@ -40,6 +40,18 @@ app.get('/read-data',async(req,resp)=>{
  }
 })
 
+// UPDATE-DATA || PUT
+
+app.put('/update-data/:id',async(req,resp)=>{
+try {
+    const id = req.params.id
+    const updateData = await CrudModel.findByIdAndUpdate({_id:id},req.body,{new:true})
+    resp.send(updateData)
+} catch (error) {
+    console.log(error)
+}
+})
+
 
 app.listen(PORT,()=>{
     console.log(`Server Running on port ${PORT}`)
