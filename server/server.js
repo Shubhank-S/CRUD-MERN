@@ -16,11 +16,30 @@ app.get('/',(req,resp)=>{
 resp.send("hiii")
 })
 
-app.post('/post',async(req,resp)=>{
- const data =new CrudModel(req.body)
- const save = await data.save()
- resp.send(save)
+// CREATE-DATA || POST
+
+app.post('/create-data',async(req,resp)=>{
+try {
+    const data =new CrudModel(req.body)
+    const save = await data.save()
+    resp.send(save)
+} catch (error) {
+    console.log(error)
+}
 })
+
+// READ-DATA || GET
+
+app.get('/read-data',async(req,resp)=>{
+ try {
+    const findData = await CrudModel.find()
+    resp.send(findData)
+    console.log(findData)
+ } catch (error) {
+    console.log(error)
+ }
+})
+
 
 app.listen(PORT,()=>{
     console.log(`Server Running on port ${PORT}`)
