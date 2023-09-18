@@ -52,6 +52,17 @@ try {
 }
 })
 
+// DELETE-DATA || DELETE
+
+app.delete('/delete-data/:id',async(req,resp)=>{
+try {
+    const deleteData =await CrudModel.findByIdAndDelete(req.params.id)
+    resp.send(deleteData)
+} catch (error) {
+    console.log(error)
+}
+})
+
 
 app.listen(PORT,()=>{
     console.log(`Server Running on port ${PORT}`)
