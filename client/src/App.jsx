@@ -27,7 +27,7 @@ function App() {
     const GetData = async () => {
       try {
         const result = await axios.get("http://localhost:8080/read-data");
-        console.log(result.data);
+        // console.log(result.data);
         setList(result.data);
       } catch (error) {
         console.log(error);
@@ -46,6 +46,19 @@ function App() {
         name: newName,
         age: newAge,
       });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Delete Data from Database || Delete
+
+  const DeleteData = async (id) => {
+    try {
+      const deleteData = await axios.delete(
+        `http://localhost:8080/delete-data/${id}`
+      );
+      console.log(deleteData);
     } catch (error) {
       console.log(error);
     }
@@ -76,7 +89,7 @@ function App() {
           <h1>{value.name}</h1>
           <h1>{value.age}</h1>
           <button onClick={() => UpdateData(value._id)}>Update</button>
-          <button>Delete</button>
+          <button onClick={() => DeleteData(value._id)}>Delete</button>
         </div>
       ))}
     </main>
