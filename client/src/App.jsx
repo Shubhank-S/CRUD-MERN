@@ -24,7 +24,7 @@ function App() {
   //Get Data From Database || Read
 
   useEffect(() => {
-    const UpdateData = async () => {
+    const GetData = async () => {
       try {
         const result = await axios.get("http://localhost:8080/read-data");
         console.log(result.data);
@@ -33,8 +33,24 @@ function App() {
         console.log(error);
       }
     };
-    UpdateData();
+    GetData();
   }, []);
+
+  //Update Data of Database || PUT
+
+  const UpdateData = async (id) => {
+    try {
+      const newName = prompt("Enter new name");
+      const newAge = prompt("Enter new age");
+      const data = await axios.put(`http://localhost:8080/update-data/${id}`, {
+        name: newName,
+        age: newAge,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -59,7 +75,7 @@ function App() {
         <div className="mapped_items">
           <h1>{value.name}</h1>
           <h1>{value.age}</h1>
-          <button>Update</button>
+          <button onClick={() => UpdateData(value._id)}>Update</button>
           <button>Delete</button>
         </div>
       ))}
