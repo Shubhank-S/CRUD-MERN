@@ -11,11 +11,12 @@ function App() {
 
   const CreateData = async () => {
     try {
-      const data = await axios.post("http://localhost:8080/create-data", {
+      const dataa = await axios.post("http://localhost:8080/create-data", {
         name: name,
         age: age,
       });
-      // console.log(data);
+      setList([...list, { _id: dataa.data._id, name: name, age: age }]);
+      console.log(dataa.data);
     } catch (error) {
       console.log(error);
     }
